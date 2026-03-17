@@ -1,5 +1,14 @@
 HELP.md
+
+### Local environment ###
+.env
+.env.*
+
+### Gradle ###
 .gradle
+.gradle-local/
+*.lck
+*.part
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
@@ -35,3 +44,4 @@ out/
 
 ### VS Code ###
 .vscode/
+.DS_Store
