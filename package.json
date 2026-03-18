@@ -1,0 +1,13 @@
+{
+  "name": "todo-express",
+  "version": "1.0.0",
+  "description": "Minimal Todo CRUD server with Express",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
