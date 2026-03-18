@@ -1,22 +1,27 @@
 const express = require("express");
 const { todoRouter } = require("./routes/todos");
 const { pingMongo } = require("./db/mongo");
-const { CORS_ORIGIN } = require("./config/env");
 
-const CORS_METHODS = "GET,POST,PUT,DELETE,OPTIONS";
+const ALLOWED_ORIGINS = new Set([
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://localhost:8080",
+  "https://---.vercel.app"
+]);
+const CORS_METHODS = "GET,POST,PUT,DELETE,PATCH,OPTIONS";
 const CORS_HEADERS = "Content-Type,Authorization";
 
 function applyCors(req, res) {
   const origin = req.get("Origin");
 
-  if (!CORS_ORIGIN) {
-    res.setHeader("Access-Control-Allow-Origin", origin || "*");
-  } else if (origin === CORS_ORIGIN) {
-    res.setHeader("Access-Control-Allow-Origin", CORS_ORIGIN);
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Credentials", "true");
   }
 
   res.setHeader("Access-Control-Allow-Methods", CORS_METHODS);
   res.setHeader("Access-Control-Allow-Headers", CORS_HEADERS);
+  res.setHeader("Access-Control-Max-Age", "3600");
 }
 
 function createApp() {
