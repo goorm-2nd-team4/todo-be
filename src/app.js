@@ -1,5 +1,6 @@
 const express = require("express");
 const { todoRouter } = require("./routes/todos");
+const { pingMongo } = require("./db/mongo");
 
 function createApp() {
   const app = express();
@@ -19,8 +20,20 @@ function createApp() {
     });
   });
 
-  app.get("/health", (req, res) => {
-    res.json({ status: "ok" });
+  app.get("/health", async (req, res) => {
+    const isMongoConnected = await pingMongo();
+
+    if (!isMongoConnected) {
+      return res.status(503).json({
+        status: "error",
+        database: "disconnected"
+      });
+    }
+
+    return res.json({
+      status: "ok",
+      database: "connected"
+    });
   });
 
   app.use("/api/todos", todoRouter);
