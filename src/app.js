@@ -1,9 +1,36 @@
 const express = require("express");
 const { todoRouter } = require("./routes/todos");
 const { pingMongo } = require("./db/mongo");
+const { CORS_ORIGIN } = require("./config/env");
+
+const CORS_METHODS = "GET,POST,PUT,DELETE,OPTIONS";
+const CORS_HEADERS = "Content-Type,Authorization";
+
+function applyCors(req, res) {
+  const origin = req.get("Origin");
+
+  if (!CORS_ORIGIN) {
+    res.setHeader("Access-Control-Allow-Origin", origin || "*");
+  } else if (origin === CORS_ORIGIN) {
+    res.setHeader("Access-Control-Allow-Origin", CORS_ORIGIN);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", CORS_METHODS);
+  res.setHeader("Access-Control-Allow-Headers", CORS_HEADERS);
+}
 
 function createApp() {
   const app = express();
+
+  app.use((req, res, next) => {
+    applyCors(req, res);
+
+    if (req.method === "OPTIONS") {
+      return res.status(204).send();
+    }
+
+    return next();
+  });
 
   app.use(express.json());
 
