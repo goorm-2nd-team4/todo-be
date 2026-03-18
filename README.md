@@ -1,39 +1,23 @@
 # express todo server
 
-## run
+MongoDB를 사용하는 간단한 Todo API 서버입니다.
 
-```bash
-npm install
-npm start
-```
 
 ## endpoints
 
+- `GET /`
 - `GET /health`
 - `GET /api/todos`
 - `POST /api/todos`
 - `PUT /api/todos/:id`
 - `DELETE /api/todos/:id`
 
-## request examples
-
-create:
+## todo shape
 
 ```json
 {
-  "title": "스터디 준비",
-  "description": "Express 구조 정리",
-  "dueDate": "2026-03-20"
-}
-```
-
-update:
-
-```json
-{
-  "title": "스터디 준비 완료",
-  "description": "CRUD 확인",
-  "completed": true,
-  "dueDate": "2026-03-21"
+  "id": "mongo-object-id",
+  "title": "할 일",
+  "completed": false
 }
 ```

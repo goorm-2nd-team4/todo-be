@@ -8,6 +8,20 @@
     "dev": "node --watch src/server.js"
   },
   "dependencies": {
-    "express": "^4.21.2"
-  }
+    "dotenv": "^17.3.1",
+    "express": "^4.22.1",
+    "mongodb": "^7.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goorm-2nd-team4/todo-be.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/goorm-2nd-team4/todo-be/issues"
+  },
+  "homepage": "https://github.com/goorm-2nd-team4/todo-be#readme"
 }
